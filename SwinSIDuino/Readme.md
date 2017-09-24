@@ -18,3 +18,6 @@ Reset the SwinSID
 
 ### "XXYY\n"
 Write YY to register XX with XX and YY being two digit hex-strings.
+
+# Running kernal64 with SwinSIDuino
+You need to add "-DSIDUINO=COMx" with COMx being the COM port where the Arduino is connected (e.g. COM4). The start-scripts in the ../build directory are already modified to use COM4.
