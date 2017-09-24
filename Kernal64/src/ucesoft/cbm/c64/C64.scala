@@ -66,6 +66,7 @@ import ucesoft.cbm.misc.IRQSwitcher
 import ucesoft.cbm.misc.NMISwitcher
 import ucesoft.cbm.misc.DNDHandler
 import ucesoft.cbm.misc.KeyboardEditor
+import ucesoft.cbm.peripheral.sid.SIDx
 
 object C64 extends App {
   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
@@ -103,7 +104,13 @@ class C64 extends CBMComponent with ActionListener with GamePlayer {
   private[this] val cpu = CPU6510.make(mem)  
   private[this] var vicChip : vic.VIC = _
   private[this] var cia1,cia2 : CIA = _
-  private[this] val sid = new ucesoft.cbm.peripheral.sid.SID
+  private[this] val sid: SIDx = {
+    if (System.getProperty("SIDUINO") != null) {
+      new ucesoft.cbm.peripheral.sid.SIDuino(System.getProperty("SIDUINO"))
+    } else {
+      new ucesoft.cbm.peripheral.sid.SID
+    }
+  }
   private[this] var display : vic.Display = _
   private[this] val nmiSwitcher = new NMISwitcher(cpu.nmiRequest _)
   private[this] val irqSwitcher = new IRQSwitcher(cpu.irqRequest _)
@@ -1610,6 +1617,7 @@ class C64 extends CBMComponent with ActionListener with GamePlayer {
     
     optionMenu.addSeparator
     
+    if (System.getProperty("SIDUINO") == null) {
     val sidItem = new JMenu("SID")
     optionMenu.add(sidItem)
     val group7 = new ButtonGroup
@@ -1650,7 +1658,7 @@ class C64 extends CBMComponent with ActionListener with GamePlayer {
     group8.add(sid2DF00Item)
     
     optionMenu.addSeparator
-    
+    }
     val diskItem = new JMenu("Drive")
     optionMenu.add(diskItem)
     

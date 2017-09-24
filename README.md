@@ -1,5 +1,9 @@
 [![Build Status](https://travis-ci.org/abbruzze/kernal64.svg?branch=master)](https://travis-ci.org/abbruzze/kernal64)
 
+SwinSIDuino-Patch
+========
+This repository contains a patched version of kernal64 which adds support to use a nano SwinSID connected via an Arduino nano. See the SwinSIDuino folder for more info and schematics.
+
 Kernal64 ver 1.4.0
 ========
 ![](https://github.com/abbruzze/kernal64/blob/master/images/c64.jpg)![](https://github.com/abbruzze/kernal64/blob/master/images/c128.jpg)

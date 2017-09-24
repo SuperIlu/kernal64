@@ -21,7 +21,9 @@ class VolumeSettingsPanel(driver:AudioDriverDevice) extends JPanel with ChangeLi
   private[this] val mute = new JCheckBox
   
   mute.addChangeListener(this)
-  slider.setValue(driver.getMasterVolume)
+  if(driver != null) {
+  	slider.setValue(driver.getMasterVolume)
+  }
   slider.addChangeListener(this)
   slider.setPaintLabels(true)
   slider.setPaintTicks(true)

@@ -1,7 +1,6 @@
 package ucesoft.cbm.peripheral.sid
 
 import resid.{SID => RESID}
-import ucesoft.cbm.Chip
 import ucesoft.cbm.ChipID
 import ucesoft.cbm.peripheral.sid.resid.ISIDDefs
 import ucesoft.cbm.Clock
@@ -10,20 +9,12 @@ import java.io.ObjectOutputStream
 import java.io.ObjectInputStream
 import javax.swing.JFrame
 
-class SID(override val startAddress:Int = 0xd400,sidID:Int = 1,externalDriver:Option[AudioDriverDevice] = None) extends Chip with SIDDevice {
+class SID(override val startAddress:Int = 0xd400,sidID:Int = 1,externalDriver:Option[AudioDriverDevice] = None) extends SIDx {
   override lazy val componentID = "SID_" + sidID
   private[this] val SAMPLE_RATE = 44100
   private[this] val CPU_FREQ = 985248
   private[this] val CLOCKS_PER_SAMPLE = CPU_FREQ / SAMPLE_RATE
   private[this] val CLOCKS_PER_SAMPLE_REST = ((CPU_FREQ * 1000L) / SAMPLE_RATE).toInt - CLOCKS_PER_SAMPLE * 1000
-  
-  val id = ChipID.SID
-  val name = "SID"
-  //val startAddress = 0xd400
-  val length = 1024
-  val isRom = false
-  
-  val isActive = true
   
   private[this] val sid = {
     val sid = new RESID

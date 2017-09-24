@@ -1,9 +1,10 @@
 package ucesoft.cbm.expansion
 
+import ucesoft.cbm.peripheral.sid.SIDx
 import ucesoft.cbm.peripheral.sid.SID
 import ucesoft.cbm.ChipID
 
-class DualSID(sid:SID,sidAddress:Int) extends ExpansionPort {
+class DualSID(sid:SIDx,sidAddress:Int) extends ExpansionPort {
   override val name = "DualSID"
   override val componentID = "DualSID"
       
